@@ -9,7 +9,7 @@ var request = require('request');
 var pluckFirstLineFromFile = function (filePath, callback) {
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
-      callback(err);
+      callback(err, data);
     } else {
       callback(null, data.split('\r')[0]);
     }
