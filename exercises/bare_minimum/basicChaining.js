@@ -14,7 +14,19 @@ var Promise = require('bluebird');
 
 
 var fetchProfileAndWriteToFile = function(readFilePath, writeFilePath) {
-  // TODO
+  return new Promise((resolve, reject) => {
+    // console.log(readFilePath, writeFilePath);
+    pluckFirstLineFromFileAsync(readFilePath)
+     .then(data => {
+       getGitHubProfileAsync(data)
+        .then(data => {
+          fsPromises.writeFile(writeFilePath, JSON.stringify(data))
+           .then(() => {
+            resolve();
+           })
+        })
+     })
+  })
 };
 
 // Export these functions so we can test them
